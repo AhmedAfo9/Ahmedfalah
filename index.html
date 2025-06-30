@@ -52,6 +52,7 @@
             font-size: 18px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin: 5px;
         }
         button:hover {
             background-color: #2ecc71;
@@ -81,15 +82,16 @@
 <body>
 
     <div class="container">
-        <h1>المعدل التفاضلي</h1>
+        <h1>احتساب المعدل التفاضلي</h1>
 
-        <input type="number" id="studentAvg" step="0.1" placeholder="معدل الطالب (استخدم الأعشار)">
-        <input type="number" id="topAvg" step="0.1" placeholder="معدل الأول على الدفعة (استخدم الأعشار)">
-        <input type="number" id="examScore" step="0.1" placeholder="درجة الامتحان (استخدم الأعشار)">
+        <input type="number" id="studentAvg" step="0.1" placeholder="معدل الطالب (مع الأعشار)">
+        <input type="number" id="topAvg" step="0.1" placeholder="معدل الطالب الأول (مع الأعشار)">
+        <input type="number" id="examScore" step="0.1" placeholder="درجة الامتحان التنافسي">
 
         <div class="note">يرجى إدخال القيم بدقة بالأعشار (البوينت) للحصول على نتيجة دقيقة.</div>
 
         <button onclick="calculate()">احسب</button>
+        <button onclick="resetForm()">إعادة الحساب</button>
 
         <div class="result" id="result"></div>
 
@@ -114,6 +116,13 @@
 
             document.getElementById('result').innerHTML =
                 'النتيجة النهائية: ' + finalScore.toFixed(2);
+        }
+
+        function resetForm() {
+            document.getElementById('studentAvg').value = '';
+            document.getElementById('topAvg').value = '';
+            document.getElementById('examScore').value = '';
+            document.getElementById('result').innerHTML = '';
         }
     </script>
 
