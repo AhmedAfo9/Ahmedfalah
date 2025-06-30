@@ -65,64 +65,8 @@
     </div>
 
     <script>
-        // حساب المعدل
-        function calculate() {
-            var studentAvg = parseFloat(document.getElementById('studentAvg').value);
-            var topAvg = parseFloat(document.getElementById('topAvg').value);
-            var examScore = parseFloat(document.getElementById('examScore').value);
-
-            if (isNaN(studentAvg) || isNaN(topAvg) || isNaN(examScore)) {
-                document.getElementById('result').innerHTML = 'يرجى تعبئة كل الحقول بشكل صحيح';
-                return;
-            }
-
-            var relativeGrade = ((studentAvg / topAvg) * 100 + (studentAvg / 2)) / 2;
-            var relativeOutOf70 = relativeGrade * 0.7;
-            var examOutOf30 = examScore * 0.3;
-            var finalScore = relativeOutOf70 + examOutOf30;
-
-            document.getElementById('result').innerHTML =
-                'النتيجة النهائية: ' + finalScore.toFixed(2);
-        }
-
-        // إعادة الحساب
-        function resetForm() {
-            document.getElementById('studentAvg').value = '';
-            document.getElementById('topAvg').value = '';
-            document.getElementById('examScore').value = '';
-            document.getElementById('result').innerHTML = '';
-        }
-
-        // تعطيل F12 وأدوات المطور
-        document.addEventListener('keydown', function (e) {
-            if (e.keyCode === 123 || // F12
-                (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
-                (e.ctrlKey && e.shiftKey && e.keyCode === 74) || // Ctrl+Shift+J
-                (e.ctrlKey && e.keyCode === 85)) { // Ctrl+U
-                e.preventDefault();
-            }
-        });
-
-        // كاشف فقدان الفوكاس
-        document.addEventListener('visibilitychange', function () {
-            if (document.hidden) {
-                alert('تم كشف خروجك من الصفحة، يرجى عدم التلاعب.');
-            }
-        });
-
-        // تعطيل النسخ واللصق والزر الأيمن (أمان إضافي)
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-        });
-        document.addEventListener('copy', function (e) {
-            e.preventDefault();
-        });
-        document.addEventListener('cut', function (e) {
-            e.preventDefault();
-        });
-        document.addEventListener('paste', function (e) {
-            e.preventDefault();
-        });
+        // JavaScript Minified 🔒
+        function calculate(){var e=parseFloat(document.getElementById('studentAvg').value),t=parseFloat(document.getElementById('topAvg').value),n=parseFloat(document.getElementById('examScore').value);if(isNaN(e)||isNaN(t)||isNaN(n))return void(document.getElementById('result').innerHTML='يرجى تعبئة كل الحقول بشكل صحيح');var a=((e/t)*100+e/2)/2,r=.7*a,c=.3*n,l=r+c;document.getElementById('result').innerHTML='النتيجة النهائية: '+l.toFixed(2)}function resetForm(){document.getElementById('studentAvg').value='',document.getElementById('topAvg').value='',document.getElementById('examScore').value='',document.getElementById('result').innerHTML=''}document.addEventListener('keydown',function(e){(123===e.keyCode||e.ctrlKey&&e.shiftKey&&73===e.keyCode||e.ctrlKey&&e.shiftKey&&74===e.keyCode||e.ctrlKey&&85===e.keyCode)&&e.preventDefault()}),document.addEventListener('visibilitychange',function(){document.hidden&&alert('تم كشف خروجك من الصفحة، يرجى عدم التلاعب.')}),document.addEventListener('contextmenu',function(e){e.preventDefault()}),document.addEventListener('copy',function(e){e.preventDefault()}),document.addEventListener('cut',function(e){e.preventDefault()}),document.addEventListener('paste',function(e){e.preventDefault()});
     </script>
 
 </body>
