@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حساب المعدل التفاضلي</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
         body, html {
             height: 100%;
             overflow: hidden;
@@ -29,57 +25,27 @@
             max-width: 400px;
             text-align: center;
         }
-        h1 {
-            font-size: 24px;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
+        h1 { font-size: 24px; color: #2c3e50; margin-bottom: 20px; }
         input {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            font-size: 16px;
-            text-align: center;
+            width: 90%; padding: 10px; margin: 10px 0;
+            border: 1px solid #ccc; border-radius: 10px;
+            font-size: 16px; text-align: center;
         }
         button {
-            padding: 12px 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin: 5px;
+            padding: 12px 20px; background-color: #3498db; color: white;
+            border: none; border-radius: 10px; font-size: 18px;
+            cursor: pointer; transition: background-color 0.3s ease; margin: 5px;
         }
-        button:hover {
-            background-color: #2ecc71;
-        }
-        .note {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #e74c3c;
-        }
-        .result {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #333;
-            font-weight: bold;
-        }
+        button:hover { background-color: #2ecc71; }
+        .note { margin-top: 10px; font-size: 14px; color: #e74c3c; }
+        .result { margin-top: 20px; font-size: 18px; color: #333; font-weight: bold; }
         .footer {
-            margin-top: 15px;
-            padding: 10px;
-            background-color: #2c3e50;
-            color: #f1c40f;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: bold;
+            margin-top: 15px; padding: 10px; background-color: #2c3e50;
+            color: #f1c40f; border-radius: 10px; font-size: 14px; font-weight: bold;
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false" oncopy="return false" oncut="return false" onpaste="return false">
 
     <div class="container">
         <h1>احتساب المعدل التفاضلي</h1>
@@ -99,6 +65,7 @@
     </div>
 
     <script>
+        // حساب المعدل
         function calculate() {
             var studentAvg = parseFloat(document.getElementById('studentAvg').value);
             var topAvg = parseFloat(document.getElementById('topAvg').value);
@@ -118,12 +85,44 @@
                 'النتيجة النهائية: ' + finalScore.toFixed(2);
         }
 
+        // إعادة الحساب
         function resetForm() {
             document.getElementById('studentAvg').value = '';
             document.getElementById('topAvg').value = '';
             document.getElementById('examScore').value = '';
             document.getElementById('result').innerHTML = '';
         }
+
+        // تعطيل F12 وأدوات المطور
+        document.addEventListener('keydown', function (e) {
+            if (e.keyCode === 123 || // F12
+                (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
+                (e.ctrlKey && e.shiftKey && e.keyCode === 74) || // Ctrl+Shift+J
+                (e.ctrlKey && e.keyCode === 85)) { // Ctrl+U
+                e.preventDefault();
+            }
+        });
+
+        // كاشف فقدان الفوكاس
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                alert('تم كشف خروجك من الصفحة، يرجى عدم التلاعب.');
+            }
+        });
+
+        // تعطيل النسخ واللصق والزر الأيمن (أمان إضافي)
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('copy', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('cut', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('paste', function (e) {
+            e.preventDefault();
+        });
     </script>
 
 </body>
