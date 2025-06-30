@@ -38,7 +38,17 @@
         }
         button:hover { background-color: #2ecc71; }
         .note { margin-top: 10px; font-size: 14px; color: #e74c3c; }
-        .result { margin-top: 20px; font-size: 18px; color: #333; font-weight: bold; }
+        .card {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 15px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .green { background-color: #27ae60; }
+        .red { background-color: #c0392b; }
         .footer {
             margin-top: 15px; padding: 10px; background-color: #2c3e50;
             color: #f1c40f; border-radius: 10px; font-size: 14px; font-weight: bold;
@@ -59,14 +69,64 @@
         <button onclick="calculate()">احسب</button>
         <button onclick="resetForm()">إعادة الحساب</button>
 
-        <div class="result" id="result"></div>
+        <div id="relativeCard"></div>
+        <div id="finalCard"></div>
 
         <div class="footer">تم بواسطة احمد فلاح</div>
     </div>
 
     <script>
-        // JavaScript Minified 🔒
-        function calculate(){var e=parseFloat(document.getElementById('studentAvg').value),t=parseFloat(document.getElementById('topAvg').value),n=parseFloat(document.getElementById('examScore').value);if(isNaN(e)||isNaN(t)||isNaN(n))return void(document.getElementById('result').innerHTML='يرجى تعبئة كل الحقول بشكل صحيح');var a=((e/t)*100+e/2)/2,r=.7*a,c=.3*n,l=r+c;document.getElementById('result').innerHTML='النتيجة النهائية: '+l.toFixed(2)}function resetForm(){document.getElementById('studentAvg').value='',document.getElementById('topAvg').value='',document.getElementById('examScore').value='',document.getElementById('result').innerHTML=''}document.addEventListener('keydown',function(e){(123===e.keyCode||e.ctrlKey&&e.shiftKey&&73===e.keyCode||e.ctrlKey&&e.shiftKey&&74===e.keyCode||e.ctrlKey&&85===e.keyCode)&&e.preventDefault()}),document.addEventListener('visibilitychange',function(){document.hidden&&alert('تم كشف خروجك من الصفحة، يرجى عدم التلاعب.')}),document.addEventListener('contextmenu',function(e){e.preventDefault()}),document.addEventListener('copy',function(e){e.preventDefault()}),document.addEventListener('cut',function(e){e.preventDefault()}),document.addEventListener('paste',function(e){e.preventDefault()});
+        function calculate() {
+            var studentAvg = parseFloat(document.getElementById('studentAvg').value);
+            var topAvg = parseFloat(document.getElementById('topAvg').value);
+            var examScore = parseFloat(document.getElementById('examScore').value);
+
+            if (isNaN(studentAvg) || isNaN(topAvg) || isNaN(examScore)) {
+                alert('يرجى تعبئة كل الحقول بشكل صحيح');
+                return;
+            }
+
+            var relativeGrade = ((studentAvg / topAvg) * 100 + (studentAvg / 2)) / 2;
+            var relativeOutOf70 = relativeGrade * 0.7;
+            var examOutOf30 = examScore * 0.3;
+            var finalScore = relativeOutOf70 + examOutOf30;
+
+            // تحديد اللون حسب الدرجة
+            var relativeColor = (relativeGrade >= 50) ? 'green' : 'red';
+            var finalColor = (finalScore >= 50) ? 'green' : 'red';
+
+            // عرض النتائج
+            document.getElementById('relativeCard').innerHTML =
+                '<div class="card ' + relativeColor + '">المعدل النسبي: ' + relativeGrade.toFixed(2) + '</div>';
+
+            document.getElementById('finalCard').innerHTML =
+                '<div class="card ' + finalColor + '">المعدل التفاضلي النهائي: ' + finalScore.toFixed(2) + '</div>';
+        }
+
+        function resetForm() {
+            document.getElementById('studentAvg').value = '';
+            document.getElementById('topAvg').value = '';
+            document.getElementById('examScore').value = '';
+            document.getElementById('relativeCard').innerHTML = '';
+            document.getElementById('finalCard').innerHTML = '';
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73) || (e.ctrlKey && e.shiftKey && e.keyCode === 74) || (e.ctrlKey && e.keyCode === 85)) {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                alert('تم كشف خروجك من الصفحة، يرجى عدم التلاعب.');
+            }
+        });
+
+        document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+        document.addEventListener('copy', function (e) { e.preventDefault(); });
+        document.addEventListener('cut', function (e) { e.preventDefault(); });
+        document.addEventListener('paste', function (e) { e.preventDefault(); });
     </script>
 
 </body>
