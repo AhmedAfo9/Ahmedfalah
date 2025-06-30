@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حساب المعدل التفاضلي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            text-align: center;
+        }
+        button {
+            padding: 12px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2ecc71;
+        }
+        .note {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #e74c3c;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: #f1c40f;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>المعدل التفاضلي</h1>
+
+        <input type="number" id="studentAvg" step="0.1" placeholder="معدل الطالب (استخدم الأعشار)">
+        <input type="number" id="topAvg" step="0.1" placeholder="معدل الأول على الدفعة (استخدم الأعشار)">
+        <input type="number" id="examScore" step="0.1" placeholder="درجة الامتحان (استخدم الأعشار)">
+
+        <div class="note">يرجى إدخال القيم بدقة بالأعشار (البوينت) للحصول على نتيجة دقيقة.</div>
+
+        <button onclick="calculate()">احسب</button>
+
+        <div class="result" id="result"></div>
+
+        <div class="footer">تم بواسطة احمد فلاح</div>
+    </div>
+
+    <script>
+        function calculate() {
+            var studentAvg = parseFloat(document.getElementById('studentAvg').value);
+            var topAvg = parseFloat(document.getElementById('topAvg').value);
+            var examScore = parseFloat(document.getElementById('examScore').value);
+
+            if (isNaN(studentAvg) || isNaN(topAvg) || isNaN(examScore)) {
+                document.getElementById('result').innerHTML = 'يرجى تعبئة كل الحقول بشكل صحيح';
+                return;
+            }
+
+            var relativeGrade = ((studentAvg / topAvg) * 100 + (studentAvg / 2)) / 2;
+            var relativeOutOf70 = relativeGrade * 0.7;
+            var examOutOf30 = examScore * 0.3;
+            var finalScore = relativeOutOf70 + examOutOf30;
+
+            document.getElementById('result').innerHTML =
+                'النتيجة النهائية: ' + finalScore.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
